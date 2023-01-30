@@ -1,0 +1,14 @@
+wheel
+
+requests
+pyperclip
+
+# numpy
+# plotly
+# pandas
+
+flask
+pywebio
+
+twilio
+adafruit-io
