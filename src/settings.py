@@ -7,7 +7,7 @@ import json
 from pywebio import output
 
 # SETTINGS_FILE_NAME = "/root/.plebtools/settings.json"
-SETTINGS_FILE_NAME = "./data/settings.json"
+SETTINGS_FILE_NAME = "/settings.json"
 
 class AppSettings:
     """TODO: docstring for AppSettings"""
@@ -15,7 +15,7 @@ class AppSettings:
     # TODO - add feature of providing a filename
     def __init__(self) -> None:
         try:
-            with open(SETTINGS_FILE_NAME, 'r', encoding="utf-8") as settings_file:
+            with open(SETTINGS_FILE_NAME, 'r') as settings_file:
                 self._settings_json = json.load( settings_file )
                 logging.debug("Settings loaded: %s", self._settings_json)
 
@@ -40,7 +40,7 @@ class AppSettings:
                 'TWILIO_TOKEN' : '',
                 'TWILIO_PHONE_NUMBER': '',
                 # E164 format: [+] [country code] [subscriber number including area code]
-                'NOTIFY_PHONE_NUMBER': '',
+                'NOTIFY_PHONE_NUMBER': ''
             }
             self.save_settings()
 
@@ -52,7 +52,7 @@ class AppSettings:
             output.toast("Settings not loaded, not saving", duration=5, color='error')
             return
 
-        with output.put_loading(color='primary'):#, scope='main', position=output.OutputPosition.BOTTOM):
+        with output.put_loading(color='primary', position=output.OutputPosition.BOTTOM):
             with open(SETTINGS_FILE_NAME, 'w', encoding="utf-8") as settings_file:
                 json.dump(self._settings_json, settings_file, indent=4)
 

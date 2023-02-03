@@ -1,25 +1,3 @@
-#!/bin/sh
-
-# first run
-if [ ! -f /settings.json ]; then
-cat << EOF > /settings.json
-{
-    "RPC_USER": "bitcoin",
-    "RPC_PASS": "<< GET_PASSWORD_FROM_BITCOIN_PROPERTIES_PANE >>",
-    "RPC_HOST": "bitcoind.embassy",
-    "RPC_PORT": "8332",
-    "BRAIINS_TOKEN": "",
-    "ADAFRUIT_USERNAME": "",
-    "ADAFRUIT_APITOKEN": "",
-    "TWILIO_SID": "",
-    "TWILIO_TOKEN" : "",
-    "TWILIO_PHONE_NUMBER": "",
-    "NOTIFY_PHONE_NUMBER": ""
-}
-EOF
-fi
-
-# # https://github.com/Start9Labs/filebrowser-wrapper/blob/master/docker_entrypoint.sh#L15-L30
 # write_properties_stats_yaml() {
 #     mkdir -p /root/start9
 #     echo 'data:' >> /root/start9/stats.yaml
@@ -40,13 +18,37 @@ fi
 #     echo '    qr: false' >> /root/start9/stats.yaml
 # }
 
-# write_properties_stats_yaml()
+"""
+TODO:
+https://github.com/Start9Labs/filebrowser-wrapper/blob/master/docker_entrypoint.sh#L15-L30
+"""
 
-/usr/bin/local python3 stats-yaml.py
 
-# health-check.sh &
+#!/usr/bin/env python3
 
-# run the application
-# exec python -m src
-# https://github.com/goshiz/start9labs-havend-wrapper/blob/master/docker_entrypoint.sh
-exec /usr/bin/local python3 -m src
+
+import yaml
+
+data = {
+    'data': {
+        'Hello': {
+            'type': 'string',
+            'value': 'admin',
+            'description': 'This is .',
+            'copyable': True,
+            'masked': False,
+            'qr': False
+        },
+        'World': {
+            'type': 'string',
+            'value': 'asdfasdf',
+            'description': 'This randomly-generated.',
+            'copyable': True,
+            'masked': True,
+            'qr': False,
+        }
+    }
+}
+
+with open('/start9/stats.yaml', 'w') as outfile:
+    yaml.dump(data, outfile)

@@ -1,0 +1,30 @@
+#!/bin/bash
+
+
+# make uninstall
+
+# while echo "$(embassy-cli package list)" | grep -q "plebg-plebtools"; do
+#   echo "Package is still installed..."
+#   sleep 3
+# done
+
+# embassy-cli package stop "plebg-plebtools"
+
+if echo "$(embassy-cli package list)" | grep -q "plebg-plebtools"; then
+  embassy-cli package uninstall "plebg-plebtools"
+  read -p "Press enter ONCE IT'S FINISHED UNINSTALLING..."
+fi
+
+
+make clean
+make
+make install
+embassy-cli package start "plebg-plebtools"
+embassy-cli package logs -f "plebg-plebtools"
+
+exit
+
+
+# sudo docker exec -u root -it plebg-plebtools.embassy sh
+
+# embassy-cli notification create "package" "warning" "TITLE" "message..."
