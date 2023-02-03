@@ -12,3 +12,4 @@ pywebio
 
 twilio
 adafruit-io
+PyYAML

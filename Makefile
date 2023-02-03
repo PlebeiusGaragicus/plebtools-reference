@@ -29,6 +29,9 @@ else
 	embassy-cli package install $(PKG_ID).s9pk
 endif
 
+uninstall:
+	embassy-cli package uninstall $(PKG_ID)
+
 clean:
 	rm -rf docker-images
 	rm -f image.tar

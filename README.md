@@ -1,10 +1,6 @@
 # this is a draft...
 
-wen?  ...soon...
-
-
 ---
-
 
 # PlebTools on EmbassyOS
 
