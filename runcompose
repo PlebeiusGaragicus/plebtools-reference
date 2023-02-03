@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# run the docker-compose.yml file
+docker compose up -d --remove-orphans --build
+
+# show the logs
+docker logs -f $(docker ps -lq)
+
+# close and destroy the container
+docker compose down
